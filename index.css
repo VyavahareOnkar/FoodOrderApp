@@ -84,6 +84,10 @@
   border-radius: 10px;
 }
 
+#top10 {
+  margin-top: 95px;
+}
+
 .cardbox {
   display: flex;
   flex-wrap: wrap;
@@ -101,7 +105,7 @@
   display: flex;
   flex-direction: column;
   width: 250px;
-  height: 300px;
+  /* height: 300px; */
   background-color: rgb(237, 235, 235);
   align-items: center;
   padding: 10px;
@@ -117,6 +121,19 @@
 .card:hover {
   transform: translateY(-8px); /* subtle lift */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* deeper shadow */
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 87px 31px;
+}
+
+.shimmer-card {
+  background-color: #ebe8e8;
+  width: 250px;
+  height: 280px;
+  margin: 20px;
 }
 
 .footer {
