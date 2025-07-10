@@ -1,13 +1,15 @@
-import Searchbar from "./Searchbar";
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-  let [resData, setresData] = useState([]);
+  const [resData, setresData] = useState([]);
+  const [searchText, setsearchText] = useState("");
+  const [searchData, setsearchData] = useState([]);
 
   useEffect(() => {
     fetchData();
+    console.log("Inside useeffect", resData);
   }, []);
 
   const fetchData = async () => {
@@ -21,16 +23,44 @@ const Body = () => {
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
+    setsearchData(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
 
   if (resData.length === 0) {
     console.log("shimmer is working");
     return <Shimmer />;
   }
-
+  console.log("rendering!");
   return (
     <div className="body">
-      <Searchbar />
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Search Restaurants"
+          className="searchbar"
+          value={searchText}
+          onChange={(e) => {
+            setsearchText(e.target.value);
+          }}
+        />
+        <button
+          className="btn"
+          onClick={() => {
+            console.log("search btn clicked!");
+            const filterData = resData.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            console.log(resData);
+            setsearchData(filterData);
+          }}
+        >
+          Search
+        </button>
+      </div>
+
       <div className="toplist">
         <button
           className="btn"
@@ -39,14 +69,14 @@ const Body = () => {
             const filteredData = resData.filter(
               (restaurant) => restaurant.info.avgRating > 4
             );
-            setresData(filteredData);
+            setsearchData(filteredData);
           }}
         >
           Click for Top Restaurants
         </button>
       </div>
       <div className="cardbox">
-        {resData.map((restaurant) => (
+        {searchData.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
