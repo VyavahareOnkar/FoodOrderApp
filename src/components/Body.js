@@ -29,12 +29,11 @@ const Body = () => {
     );
   };
 
-  if (resData.length === 0) {
-    console.log("shimmer is working");
-    return <Shimmer />;
-  }
   console.log("rendering!");
-  return (
+
+  return resData.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="search">
         <input

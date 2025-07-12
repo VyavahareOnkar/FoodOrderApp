@@ -35,11 +35,7 @@ useState() definition: Whenever state variable updates, react re-render its comp
 Why React is Fast?
 React is very good at efficient DOM Manipulation or Operations (because it has virtual DOM) and re-rendering the component on the UI, this is the reason developers prefer react.
 
-Monolith Architecture:
-
-Microservices Architecture:
-
-Monolith & Microservices architecture.
+# Monolith & Microservices architecture.
 
 (Load -> Render with Shimmer UI -> API Call -> Re-render UI)
 useEffect()
@@ -51,3 +47,9 @@ CORS
 Optional Chaining
 
 Shimmer UI
+
+# 2 types of routing
+
+- Client side routing- Used in react - Each components already present in our app by initial rendering, we are just rendering the components already present on client side using routing
+
+- Server side routing- using anchor tag, the whole page gets refreshed, and it will bring e.g. /contact.html page from server.
