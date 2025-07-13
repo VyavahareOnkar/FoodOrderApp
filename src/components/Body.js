@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
 
 const Body = () => {
   const [resData, setresData] = useState([]);
@@ -9,7 +10,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("Inside useeffect", resData);
+    // console.log("Inside useeffect", resData);
   }, []);
 
   const fetchData = async () => {
@@ -20,7 +21,7 @@ const Body = () => {
     const jsonData = await data.json();
 
     setresData(
-      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setsearchData(
@@ -76,7 +77,12 @@ const Body = () => {
       </div>
       <div className="cardbox">
         {searchData.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
