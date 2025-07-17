@@ -44,19 +44,33 @@ const Body = () => {
   return resData.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="search">
+    <div className="body  my-4">
+      <div className="search flex justify-center  ">
+        <div className="toplist">
+          <button
+            className="btn  m-2 bg-amber-500 hover:bg-amber-700 text-white p-2 rounded-xl"
+            id="top10"
+            onClick={() => {
+              const filteredData = resData.filter(
+                (restaurant) => restaurant.info.avgRating > 4
+              );
+              setsearchData(filteredData);
+            }}
+          >
+            Click for Top Restaurants
+          </button>
+        </div>
         <input
           type="text"
           placeholder="Search Restaurants"
-          className="searchbar"
+          className="searchbar border-2 m-2 p-2"
           value={searchText}
           onChange={(e) => {
             setsearchText(e.target.value);
           }}
         />
         <button
-          className="btn"
+          className="btn m-2 bg-amber-500 hover:bg-amber-700 text-white p-2 rounded-xl"
           onClick={() => {
             console.log("search btn clicked!");
             const filterData = resData.filter((res) =>
@@ -70,21 +84,7 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="toplist">
-        <button
-          className="btn"
-          id="top10"
-          onClick={() => {
-            const filteredData = resData.filter(
-              (restaurant) => restaurant.info.avgRating > 4
-            );
-            setsearchData(filteredData);
-          }}
-        >
-          Click for Top Restaurants
-        </button>
-      </div>
-      <div className="cardbox">
+      <div className="cardbox flex flex-wrap items-center justify-center">
         {searchData.map((restaurant) => (
           <Link
             key={restaurant.info.id}
