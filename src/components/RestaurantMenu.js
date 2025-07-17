@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-import { ITEM_URL, MENU_API } from "../Utils/constants";
+import { ITEM_URL } from "../Utils/constants";
 import { useParams } from "react-router";
+import useRestaurantMenu from "../Utils/useRestaurantMenu";
+import useOnlineStatus from "../Utils/useOnlineStatus";
 
 const RestaurantMenu = () => {
-  const [resInfo, setresInfo] = useState(null);
   const { resId } = useParams();
-  console.log(resId);
+  const resInfo = useRestaurantMenu(resId);
+  const onlineStatus = useOnlineStatus();
 
-  useEffect(() => {
-    fetchInfo();
-  }, []);
-
-  const fetchInfo = async () => {
-    const resData = await fetch(MENU_API + resId);
-
-    const resInfoJson = await resData.json();
-
-    setresInfo(resInfoJson?.data);
-  };
-
-  console.log(resInfo);
+  console.log("resInfo from Restaurant Menu component", resInfo);
+  if (onlineStatus === false) {
+    return (
+      <div>
+        <h1>Looks like you lost your Internet Connection, Please try again!</h1>
+      </div>
+    );
+  }
 
   if (resInfo === null) {
     return <Shimmer />;
@@ -40,6 +36,11 @@ const RestaurantMenu = () => {
     const { itemCards } =
       resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
         ?.card;
+
+    if (itemCards === undefined) {
+      resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
+        ?.card;
+    }
     console.log("items are", itemCards);
 
     return (
@@ -53,10 +54,12 @@ const RestaurantMenu = () => {
           <p> Outlet: {areaName}</p>
           <p> {sla.slaString}</p>
         </div>
-        <h1>Menu</h1>
+
         <div className="res-MenuItems">
           {itemCards === undefined ? (
-            <h1>"We are currently Closed! Apologies for Inconvenience!"</h1>
+            <h1 className="warn-banner">
+              "We are currently Closed! Apologies for Inconvenience!"
+            </h1>
           ) : (
             itemCards.map((item) => {
               return (

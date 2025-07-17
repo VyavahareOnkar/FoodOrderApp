@@ -61,6 +61,10 @@
   color: #6e2909;
 }
 
+.resData {
+  min-height: 65vh;
+}
+
 .search {
   display: flex;
   justify-content: space-evenly;
@@ -93,6 +97,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 70vh;
 }
 
 .Restaurants {
@@ -135,6 +140,13 @@
   width: 250px;
   height: 280px;
   margin: 20px;
+}
+
+.warn-banner {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, 350%);
 }
 
 .footer {

@@ -2,15 +2,16 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
+import useOnlineStatus from "../Utils/useOnlineStatus";
 
 const Body = () => {
   const [resData, setresData] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [searchData, setsearchData] = useState([]);
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
-    // console.log("Inside useeffect", resData);
   }, []);
 
   const fetchData = async () => {
@@ -30,7 +31,15 @@ const Body = () => {
     );
   };
 
-  console.log("rendering!");
+  console.log("body rendering!");
+
+  if (onlineStatus === false) {
+    return (
+      <div>
+        <h1>Looks like you lost your Internet Connection, Please try again!</h1>
+      </div>
+    );
+  }
 
   return resData.length === 0 ? (
     <Shimmer />

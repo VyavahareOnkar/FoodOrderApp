@@ -2,23 +2,6 @@
 
 - Learn Config Driven UI
 
--<AppLayout> -<Header>
--logo
--navbar
--image
-
-<Header/> 
--<body>
--Search & button
--restaurantCards -<Cards/>
-<body/> 
--<Footer>
--copyright
--contact us
--links
-<Footer/>
-<AppLayout/>
-
 # Two ways of export and import:
 
 -1st: export default component;
@@ -53,3 +36,24 @@ Shimmer UI
 - Client side routing- Used in react - Each components already present in our app by initial rendering, we are just rendering the components already present on client side using routing
 
 - Server side routing- using anchor tag, the whole page gets refreshed, and it will bring e.g. /contact.html page from server.
+
+# React Class base Components:
+
+# lifecycle of class base components in react
+
+# React Lifecycle methods,
+
+# React custom hook ( make our code more modular, maintainable, following single responsibility principal of software engineering)
+
+# For large react application with large amount of components, it is not feasible to bundle all the components into single javascript file, it will increase the memory size and it will cause slow loading and rendering the application, to avoid this we use code splitting methods in order to reduce initial bundle size.
+
+- It has different names as follows:
+
+  - Code Splitting
+  - Chunking
+  - Lazy Loading
+  - On Demand Loading
+  - Dynamic Bundling
+  - Dynamic Import
+
+- React has lazy() method and Suspense component inside 'react' which we need to use in order to chunk/code split.

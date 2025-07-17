@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { LOGO_URL } from "../Utils/constants";
 import { Link } from "react-router";
+import useOnlineStatus from "../Utils/useOnlineStatus";
 
 const Header = () => {
   const [reactBtn, setreactBtn] = useState(["Login"]);
+  const onlineStatus = useOnlineStatus();
 
   console.log("rendering");
   return (
@@ -14,6 +16,7 @@ const Header = () => {
         </div>
         <div className="navbar">
           <ul className="list">
+            <li>Status: {onlineStatus ? "🟢" : "🔴"}</li>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -28,7 +31,6 @@ const Header = () => {
             </li>
 
             <button
-              // className="btn"
               onClick={() => {
                 reactBtn == "Login"
                   ? setreactBtn("Logout")
